@@ -424,3 +424,64 @@ These can be changed from the in-game menu with real-time results.
 ![menu scale](images/ui_scale.png)
 
 
+
+
+---
+
+### Performance Edition Frame-Generation Pacing Additions
+
+These settings are optional extensions in OptiScaler Performance Edition. Existing configuration keys and defaults remain compatible.
+
+#### FSR Frame-Generation Pacing Profile
+
+```ini
+[FSRFG]
+; Existing master switch. When disabled, the profile setting below is ignored.
+FramePacingTuning=auto
+
+; 0 = Manual
+; 1 = Smoothness
+; 2 = Balanced
+; 3 = Low Latency
+; 4 = Adaptive (experimental)
+; Default (auto) is 0 (Manual), preserving the previous behavior.
+FPTProfile=auto
+```
+
+`Manual` keeps using `FPTSafetyMarginInMs`, `FPTVarianceFactor`, `FPTHybridSpin`,
+`FPTHybridSpinTime`, and `FPTWaitForSingleObjectOnFence` exactly as before.
+
+`Smoothness`, `Balanced`, and `Low Latency` apply conservative built-in combinations of the same
+FSR frame-pacing tuning API. `Adaptive` is experimental and selects among those profiles from the
+shared PerformanceState telemetry. Adaptive mode reacts to timing stability, queue/present blocking,
+workload class, and VRAM pressure. It does not change the order or number of FSR provider dispatches.
+
+#### Adaptive Sharpening Safety Modifier
+
+```ini
+[CAS]
+; Experimental. Reduces the existing RCAS/depth-aware sharpening value during unstable FG/timing states.
+; It never increases the user's selected sharpness.
+; Default (auto) is false.
+AdaptiveSharpnessEnabled=auto
+
+; Lowest allowed multiplier applied to the existing sharpness value.
+; Valid range: 0.40 - 1.00. Default (auto) is 0.75.
+AdaptiveSharpnessMinScale=auto
+```
+
+The adaptive sharpness modifier is disabled by default. When enabled, it can reduce sharpening during
+high FG multipliers, unstable frame pacing, queue pressure, or critical VRAM pressure to reduce visible
+shimmer/ringing amplification. It uses the existing sharpening shaders rather than adding a second pass.
+
+#### Frame-Time and Temporal Validation
+
+Performance Edition validates frame-time inputs before they are sent to frame-generation providers.
+Non-finite, zero, negative, and severe discontinuity samples are rejected or clamped, and severe timing
+changes request a short temporal-history reset. Motion-vector metadata and optional HUDless/UI resources
+are also validated before use. Invalid optional UI/HUDless inputs are skipped rather than treated as
+mandatory provider failures.
+
+The shared telemetry exposes candidate/submitted/completed frame counters, counter rollbacks, invalid
+frame-time samples, discontinuities, temporal resets, invalid motion-vector data, and rejected optional
+UI/HUDless inputs for debugging.

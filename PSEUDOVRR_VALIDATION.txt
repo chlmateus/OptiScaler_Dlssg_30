@@ -1,0 +1,14 @@
+LEGACY VALIDATION FILE - SUPERSEDED
+===================================
+
+The previous PseudoVRR validation described the old mixed arbitrary-target / cadence-attraction / raster-assisted
+controller. That design has been replaced by the Adaptive Fixed-Refresh Pacing Controller.
+
+See:
+  ADAPTIVE_FIXED_REFRESH_AUDIT.md
+  ADAPTIVE_FIXED_REFRESH_VALIDATION.txt (packaged alongside the release artifact)
+  ADAPTIVE_FIXED_REFRESH_LOGIC_TEST.cpp
+  PSEUDOVRR.md (compatibility filename, updated design documentation)
+  PSEUDOVRR_TEST_FS25.md (updated runtime test plan)
+
+The legacy FrameLockPseudoVrr* INI names remain for compatibility, but they no longer imply VRR emulation.

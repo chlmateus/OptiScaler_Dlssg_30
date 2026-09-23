@@ -1,0 +1,125 @@
+OptiScaler Performance Edition Stability Pass - Static Validation
+Total checks: 106
+Passed: 106
+Failed: 0
+
+[PASS] XML parses: OptiScaler/OptiScaler.vcxproj
+[PASS] XML parses: OptiScaler/OptiScaler.vcxproj.filters
+[PASS] Project includes misc\PerformanceState.h
+[PASS] Filters include misc\PerformanceState.h
+[PASS] Project includes misc\PerformanceState.cpp
+[PASS] Filters include misc\PerformanceState.cpp
+[PASS] Project includes misc\ResourceLedger.h
+[PASS] Filters include misc\ResourceLedger.h
+[PASS] Project includes misc\ResourceLedger.cpp
+[PASS] Filters include misc\ResourceLedger.cpp
+[PASS] PerformanceState tracks presentBlockMs
+[PASS] PerformanceState tracks fenceWaitMs
+[PASS] PerformanceState tracks queueLatencyEstimateMs
+[PASS] PerformanceState tracks queueDepthEstimate
+[PASS] PerformanceState tracks generatedLateEvents
+[PASS] PerformanceState tracks generatedBurstEvents
+[PASS] PerformanceState tracks resolutionGeneration
+[PASS] PerformanceState tracks swapchainGeneration
+[PASS] PerformanceState tracks fgStabilityScore
+[PASS] PerformanceState tracks predictedVramUsagePercent
+[PASS] Virtual generated timeline explicitly documented
+[PASS] Resolution generation increment
+[PASS] Resource ownership OptiScalerOwned
+[PASS] Resource ownership SharedWrapped
+[PASS] Resource ownership GameOwnedObserved
+[PASS] Resource ownership Unknown
+[PASS] Resource validator ValidateReuse
+[PASS] Resource validator ValidateRelease
+[PASS] Resource validator MarkFenceUse
+[PASS] Resource validator NotifyGeneration
+[PASS] Predictive allocation rate capped
+[PASS] Wrong queue/fence release rejected
+[PASS] FrameLock telemetry p95RenderWorkMs
+[PASS] FrameLock telemetry p99RenderWorkMs
+[PASS] PseudoVRR robust P95/P99 work use
+[PASS] Cadence attraction stability gate
+[PASS] Repeated missed deadline rebase
+[PASS] Adaptive XeFG contains ComputeXeFGStabilityScore
+[PASS] Adaptive XeFG contains UpdateAdaptiveXeFG
+[PASS] Adaptive XeFG contains unstableWindows
+[PASS] Adaptive XeFG contains StableSecondsBeforeUpgrade
+[PASS] Adaptive XeFG contains FallbackCooldownSeconds
+[PASS] Adaptive fallback 3x to 2x
+[PASS] 4x capability/stability gate
+[PASS] Adaptive policy default OFF
+[PASS] Multiplier changes flag FG recreation
+[PASS] Pending multiplier request held
+[PASS] Pending multiplier timeout fallback
+[PASS] Transition grace preserves volatile request
+[PASS] Emergency FG disable recovery logic
+[PASS] Benchmark uses run-local counters
+[PASS] Benchmark result confidenceScore
+[PASS] Benchmark result averagePresentBlockMs
+[PASS] Benchmark result averageQueueLatencyMs
+[PASS] Benchmark result lateGeneratedFrames
+[PASS] Benchmark result generatedBurstEvents
+[PASS] Benchmark result resolutionGeneration
+[PASS] Benchmark invalidates multiplier/backend/refresh
+[PASS] Benchmark invalidates resolution generation
+[PASS] Benchmark confidence threshold
+[PASS] VRAM stats predictedBudgetUsagePercent
+[PASS] VRAM stats optiOwnedTrackedBytes
+[PASS] VRAM stats optiOwnedPeakBytes
+[PASS] VRAM stats optiAllocationRateBytesPerSec
+[PASS] VRAM stats resourceValidationErrors
+[PASS] Prediction may only advance to High
+[PASS] Critical still based on actual pressure
+[PASS] Owned DX12 resources registered
+[PASS] Fence use recorded
+[PASS] Release validates fence
+[PASS] Fence release safety applies outside debug
+[PASS] Deferred unsafe release remains tracked
+[PASS] Fence wait timing published
+[PASS] Non-FG Present blocking measured
+[PASS] FG Present blocking measured
+[PASS] Swapchain recreation generation non-FG
+[PASS] Swapchain recreation generation FG
+[PASS] DX11-DX12 bridge fence timing
+[PASS] Config load PerformanceEdition.ConfigVersion
+[PASS] Config save PerformanceEdition.ConfigVersion
+[PASS] Config load PerformanceEdition.ResourceValidation
+[PASS] Config save PerformanceEdition.ResourceValidation
+[PASS] Config load VRAMGuard.PredictivePressure
+[PASS] Config save VRAMGuard.PredictivePressure
+[PASS] Config load XeFG.AdaptiveMultiplier
+[PASS] Config save XeFG.AdaptiveMultiplier
+[PASS] Config load XeFG.PreferredMultiplier
+[PASS] Config save XeFG.PreferredMultiplier
+[PASS] Config load XeFG.StableSecondsBeforeUpgrade
+[PASS] Config save XeFG.StableSecondsBeforeUpgrade
+[PASS] Config load XeFG.FallbackCooldownSeconds
+[PASS] Config save XeFG.FallbackCooldownSeconds
+[PASS] Config load XeFG.EmergencyDisable
+[PASS] Config save XeFG.EmergencyDisable
+[PASS] Config load/save latency mode
+[PASS] Config schema version 2
+[PASS] UI exposes Adaptive 3x / 2x fallback
+[PASS] UI exposes XeFG stability
+[PASS] UI exposes Latency Policy
+[PASS] UI exposes Predict near-term VRAM pressure
+[PASS] UI exposes Resource lifetime validation (debug)
+[PASS] UI exposes confidence: %d / 100
+[PASS] UI exposes queue/fence latency
+[PASS] UI exposes Fallback: %s
+[PASS] No OptiColor source integration
+[PASS] No OptiMXAO/MXAO source integration
+
+Runtime limitation:
+- Windows/MSVC/D3D11/D3D12/Vulkan game runtime was not available in this environment.
+- Static validation cannot prove absence of device-removal, race, driver or gameplay-specific issues.
+- Adaptive XeFG remains OFF by default until staged runtime testing succeeds.
+
+Synthetic portable test:
+- PerformanceState and ResourceLedger compile and execute under clang++ C++20 after removing the project PCH include.
+- The synthetic test exercised snapshot publication, queue-depth math, resource registration, fence validation, reuse validation and unregister accounting.
+
+Build Fix 1 validation:
+- [PASS] Removed invalid GetIntValue(2) call from Config.cpp.
+- [PASS] PerformanceEdition.ConfigVersion is saved directly as the fixed schema string "2".
+- [PASS] No remaining GetIntValue(integer literal) calls found in the source tree.

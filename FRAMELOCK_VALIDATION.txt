@@ -1,0 +1,93 @@
+OptiScaler + FrameLock integration validation
+============================================
+
+Source basis
+------------
+User-uploaded OptiScaler-master.zip was used directly as the baseline.
+
+Architecture
+------------
+PASS - FrameLock is integrated behind existing FrameLimit::sleep() calls.
+PASS - No standalone FrameLock DXGI factory hook added.
+PASS - No standalone FrameLock Present/Present1 hook added.
+PASS - No standalone FrameLock ASI/control-panel path added.
+PASS - Existing DXGI, FG and Vulkan paths route to the internal limiter when FrameLock is selected.
+PASS - Reflex/Anti-Lag low-latency behavior is retained while its FPS interval is cleared for forced internal limiting.
+PASS - XeLL low-latency behavior is retained while its FPS interval is cleared for forced internal limiting.
+
+Project structure
+-----------------
+PASS - OptiScaler.vcxproj XML parses.
+PASS - OptiScaler.vcxproj.filters XML parses.
+PASS - FrameLockLimiter.cpp is included in the project.
+PASS - FrameLockLimiter.h is included in the project.
+
+Baseline Visual Studio source/header refs: 497
+Modified Visual Studio source/header refs: 499
+Baseline missing referenced files in uploaded ZIP: 8
+Modified missing referenced files: 8
+PASS - FrameLock introduces no new missing project references.
+
+The eight missing files were already absent from the uploaded upstream ZIP and are unrelated to FrameLock.
+
+Config/menu
+-----------
+PASS - LimiterBackend config load/save symmetry.
+PASS - FrameLockMode config load/save symmetry.
+PASS - FrameLockAdaptiveTiming config load/save symmetry.
+PASS - FrameLockFGAware config load/save symmetry.
+PASS - FrameLockSpinThresholdUs config load/save symmetry.
+PASS - FrameLockMaxSpinThresholdUs config load/save symmetry.
+PASS - FrameLockOvershootCeilingMs config load/save symmetry.
+PASS - OptiScaler.ini documents the new keys.
+PASS - OptiScaler menu exposes Auto / FrameLock / Legacy internal backends.
+PASS - FrameLock controls and live telemetry are shown in the normal OptiScaler menu.
+PASS - FPS input accepts and displays three decimal places.
+
+Timing implementation
+---------------------
+PASS - QPC is the FrameLock scheduler clock.
+PASS - Persistent fractional deadline accumulator is used.
+PASS - High-resolution waitable timer with normal-timer fallback is used.
+PASS - Final precision spin is hard bounded by MaxSpinThresholdUs.
+PASS - Excess adaptive wake margin uses cooperative yielding rather than extending busy spin.
+PASS - Large deadline misses resynchronize instead of burst catch-up.
+PASS - Overshoot calibration rejects samples beyond the configured ceiling.
+PASS - Rolling statistics use fixed-size storage and atomically published telemetry.
+PASS - No disk writes are performed by the FrameLock wait path.
+
+Portable compiler check
+-----------------------
+PASS - FrameLockLimiter.cpp passes clang++ C++20 -Wall -Wextra -Wpedantic syntax checking with Win32 timing calls stubbed.
+This validates C++ syntax/template usage but is not a substitute for MSVC + Windows SDK compilation.
+
+Fractional deadline test
+------------------------
+PASS - 100,000-deadline phase-distribution test at a simulated 10 MHz QPC for:
+30, 36, 48, 59.94, 71.9995, 72, 90, 119.88, 120, 138, 141, 143.999, 144 FPS.
+All average interval errors were below 0.0001 QPC tick.
+
+FG integration
+--------------
+PASS - FramerateLimit can represent desired output FPS.
+PASS - OptiScaler currentFG interpolation count is used when available.
+PASS - native/NVNGX DLSSG detected interpolation count is used when available.
+PASS - Reflex DLSSG frame-count state is used as fallback.
+PASS - active ordinary FG falls back to 2x when no richer count is available.
+PASS - 143.999 output -> 71.9995 base at 2x.
+PASS - 143.999 output -> ~47.999667 base at 3x.
+PASS - 143.999 output -> 35.99975 base at 4x.
+
+Windows binary status
+---------------------
+NOT COMPILED in this environment.
+clang-cl is installed, but the Windows SDK headers/libraries are not available:
+  fatal error: 'Windows.h' file not found
+
+Next required validation
+------------------------
+1. Build this supplied OptiScaler master on Windows/MSVC exactly as the upstream tree is normally built.
+2. Launch FS25 in LimiterBackend=0 (Auto) and confirm baseline behavior.
+3. Switch to FrameLock in the OptiScaler menu at 72 FPS, Balanced, adaptive ON.
+4. Test 143.999 output with FG and verify the displayed base target changes with interpolation count.
+5. Compare FrameLock vs Auto vs Legacy internal with the same scene and external PresentMon/ETW capture.

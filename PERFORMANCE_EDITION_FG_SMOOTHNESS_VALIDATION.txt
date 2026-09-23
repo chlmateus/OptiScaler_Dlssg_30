@@ -1,0 +1,91 @@
+Performance Edition FG Smoothness / IQ V1 static validation
+Checks passed: 83/83
+
+[PASS] Unsigned rollback anti-pattern removed
+[PASS] Candidate state exists
+[PASS] Submitted compatibility state exists
+[PASS] Completed state exists
+[PASS] Candidate selection no longer commits submitted state
+[PASS] CommitDispatch declared/defined
+[PASS] SetFrameCount rollback reset
+[PASS] Counter overflow handled
+[PASS] XeFG commits successful submission
+[PASS] XeFG marks present-cycle completion
+[PASS] XeFG validates mandatory MV/depth
+[PASS] XeFG validates optional UI
+[PASS] FSRFG commits successful submission
+[PASS] FSRFG marks present-cycle completion
+[PASS] FSRFG validates mandatory MV/depth
+[PASS] FSRFG validates optional UI
+[PASS] DLSSG commits successful submission
+[PASS] DLSSG marks present-cycle completion
+[PASS] DLSSG validates mandatory MV/depth
+[PASS] DLSSG validates optional UI
+[PASS] No legacy wall-clock limiter timestamp
+[PASS] Legacy limiter uses QPC
+[PASS] Legacy limiter session reset generation
+[PASS] Legacy limiter thread-local session
+[PASS] Legacy limiter first session does not sleep
+[PASS] Legacy limiter detects actual FG multiplier
+[PASS] Legacy limiter honors exact/custom refresh
+[PASS] Hardcoded FG x2 legacy multiply removed
+[PASS] Resolution reset resets legacy pacing
+[PASS] Frame-time sanitizer declared/defined
+[PASS] Frame-time sanitizer rejects nonfinite
+[PASS] Severe discontinuity requests reset
+[PASS] FSR Input frame-time revalidated
+[PASS] XeFG Input frame-time revalidated
+[PASS] Opti frame-time path sanitized
+[PASS] FSR profile enum exists
+[PASS] FSR profile default preserves behavior
+[PASS] FSR profile config load
+[PASS] FSR profile config save
+[PASS] FSR adaptive profile uses shared state
+[PASS] FSR adaptive update rate bounded
+[PASS] FSR menu profile selector
+[PASS] FSR profile documented in ini
+[PASS] FSR profile documented in Config.md
+[PASS] PerformanceState field fgCandidateFrame
+[PASS] PerformanceState field fgSubmittedFrame
+[PASS] PerformanceState field fgCompletedFrame
+[PASS] PerformanceState field fgCounterRollbacks
+[PASS] PerformanceState field invalidFrameTimes
+[PASS] PerformanceState field frameTimeDiscontinuities
+[PASS] PerformanceState field temporalResets
+[PASS] PerformanceState field invalidMotionVectors
+[PASS] PerformanceState field invalidOptionalResources
+[PASS] PerformanceState field fsrPacingProfile
+[PASS] PerformanceState field adaptiveSharpnessScale
+[PASS] Shared telemetry UI shows FG counters
+[PASS] Shared telemetry UI shows validation
+[PASS] MV metadata finite validation
+[PASS] D3D12 resource validator exists
+[PASS] Resource rect bounds validated
+[PASS] Optional UI/HUDless mismatch validation
+[PASS] Provider/target update requests temporal reset
+[PASS] Resolution change requests temporal reset
+[PASS] Adaptive sharpness defaults disabled
+[PASS] Adaptive sharpness min validated
+[PASS] Adaptive sharpness never raises above 1x
+[PASS] Adaptive sharpness shared telemetry
+[PASS] RCAS motion output width division guarded
+[PASS] RCAS depth division guarded
+[PASS] Adaptive sharpness documented in ini
+[PASS] Adaptive sharpness documented in Config.md
+[PASS] No broad catch-all introduced
+[PASS] Balanced delimiters: OptiScaler/framegen/IFGFeature.cpp
+[PASS] Balanced delimiters: OptiScaler/framegen/IFGFeature.h
+[PASS] Balanced delimiters: OptiScaler/framegen/IFGFeature_Dx12.cpp
+[PASS] Balanced delimiters: OptiScaler/framegen/ffx/FSRFG_Dx12.cpp
+[PASS] Balanced delimiters: OptiScaler/framegen/xefg/XeFG_Dx12.cpp
+[PASS] Balanced delimiters: OptiScaler/framegen/dlssg/DLSSG_Dx12.cpp
+[PASS] Balanced delimiters: OptiScaler/misc/FrameLimit.cpp
+[PASS] Balanced delimiters: OptiScaler/misc/PerformanceState.cpp
+[PASS] Balanced delimiters: OptiScaler/shaders/rcas/RCAS_Common.cpp
+[PASS] menu_common delimiter state unchanged vs baseline — baseline='{', work='{'
+[PASS] OptiScaler.vcxproj XML parses
+
+Portable logic test: PASS (g++ -std=c++20 -O2 PERFORMANCE_EDITION_FG_LOGIC_TEST.cpp)
+Windows/MSVC/D3D runtime build: NOT RUN in this environment.
+
+[PASS] Post-validation telemetry label update: readable FSR profile names.

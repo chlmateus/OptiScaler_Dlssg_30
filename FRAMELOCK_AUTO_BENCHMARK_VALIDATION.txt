@@ -1,0 +1,57 @@
+PASS  Benchmark status enum
+PASS  Benchmark result struct
+PASS  Start API
+PASS  Cancel API
+PASS  Result API
+PASS  Apply API
+PASS  Minimum 60 s
+PASS  Five second warmup
+PASS  Saves previous config
+PASS  Restores previous config
+PASS  Cancel restores profile
+PASS  Forces internal present path during benchmark
+PASS  Neutral measurement uses Deadline
+PASS  Neutral measurement zero headroom
+PASS  Neutral measurement zero cadence attraction
+PASS  FG multiplier detected independently
+PASS  Refresh reliability guard
+PASS  FG/refresh topology-change guard
+PASS  Fixed sample storage
+PASS  Render work samples
+PASS  P95 render metric
+PASS  P99 render metric
+PASS  P99.9 render metric
+PASS  Missed deadline metric
+PASS  Stutter metric
+PASS  P99 pacing error metric
+PASS  Timer overshoot metric
+PASS  VRAM sampling
+PASS  VRAM sampled sparsely
+PASS  Critical VRAM warning threshold
+PASS  Headroom recommendation
+PASS  Hysteresis recommendation
+PASS  Cadence recommendation
+PASS  Pacing mode recommendation
+PASS  Sync mode recommendation
+PASS  Spin threshold recommendation
+PASS  One-click apply
+PASS  Apply saves INI
+PASS  Progress bar UI
+PASS  90 s recommended button
+PASS  Results UI
+PASS  Recommended settings UI
+PASS  VRAM results UI
+PASS  Invalid-run UI
+PASS  No MXAO source in branch
+PASS  No OptiColor source in branch
+PASS  FrameLimit.cpp braces balanced
+PASS  FrameLimit.h braces balanced
+PASS  Visual Studio project XML parses
+PASS  Benchmark documentation exists
+PASS  FS25 test guide exists
+PASS  Synthetic unstable run gets >= headroom than stable  [4 -> 10]
+PASS  Synthetic unstable run gets >= hysteresis than stable  [0.77 -> 1.71]
+PASS  Synthetic stable run gets >= cadence attraction  [0.84 vs 0.61]
+
+RESULT: 54/54 checks passed
+NOTE: Windows/MSVC runtime compilation and in-game timing still require the user's Release x64 build/test.

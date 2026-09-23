@@ -1,0 +1,38 @@
+FrameLock Final validation summary
+==================================
+
+[PASS] OptiScaler/OptiScaler.vcxproj XML
+[PASS] OptiScaler/OptiScaler.vcxproj.filters XML
+[PASS] Project references - 502 refs, 8 baseline missing refs
+[PASS] Config FrameLockFGAutoTarget - cpp occurrences=4, ini=True
+[PASS] Config FrameLockFGHeadroomHz - cpp occurrences=4, ini=True
+[PASS] Config FrameLockFGCadenceSnap - cpp occurrences=4, ini=True
+[PASS] Config FrameLockFGStutterGuard - cpp occurrences=4, ini=True
+[PASS] Blocking RasterWait removed
+[PASS] Raster phase assist present
+[PASS] No new graphics detour in FrameLock
+[PASS] No full-refresh raster wait loop
+[PASS] FG stutter guard present
+[PASS] FG auto-target present
+[PASS] FG cadence snap present
+[PASS] Dependency bootstrap retained
+[PASS] OptiScaler/misc/FrameLockLimiter.cpp raw brace balance - 70 / 70
+[PASS] OptiScaler/misc/FrameLockLimiter.h raw brace balance - 48 / 48
+[PASS] OptiScaler/misc/FrameLimit.cpp raw brace balance - 20 / 20
+[PASS] OptiScaler/misc/FrameLimit.h raw brace balance - 1 / 1
+[PASS] OptiScaler/Config.cpp raw brace balance - 154 / 154
+[PASS] OptiScaler/Config.h raw brace balance - 309 / 309
+[PASS] OptiScaler/menu/menu_common.cpp raw brace balance - 1025 / 1025
+[PASS] 143.999 Hz 1x cadence - base=143.999000000
+[PASS] 143.999 Hz 2x cadence - base=71.999500000
+[PASS] 143.999 Hz 3x cadence - base=47.999666667
+[PASS] 143.999 Hz 4x cadence - base=35.999750000
+[PASS] 144 requested -> exact 143.999 at 2x - out=143.999000, base=71.999500
+[PASS] 120 requested remains 120 at 2x - out=120.000000, base=60.000000
+[PASS] 3 Hz headroom preserved - out=140.999000, base=70.499500
+[PASS] Raster phase offset convergence model - final offset=2500.000000 us
+
+Portable logic syntax compile is run separately with the actual final Wait/ComputeRasterCorrection bodies.
+Windows/MSVC runtime compilation still requires the user PC, as with the already-working prior build.
+
+OVERALL: PASS

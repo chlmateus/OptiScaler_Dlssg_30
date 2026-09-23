@@ -1,0 +1,70 @@
+VRAM Guard Final Pass static validation
+Checks: 67  Passed: 67  Failed: 0
+
+[PASS] XML parses: OptiScaler/OptiScaler.vcxproj
+[PASS] XML parses: OptiScaler/OptiScaler.vcxproj.filters
+[PASS] dependency bootstrap BAT retained
+[PASS] dependency bootstrap PS1 retained
+[PASS] exists: OptiScaler/misc/VRAMGuard.cpp
+[PASS] exists: OptiScaler/misc/VRAMGuard.h
+[PASS] exists: OptiScaler/misc/FrameLockLimiter.cpp
+[PASS] exists: OptiScaler/misc/FrameLockLimiter.h
+[PASS] Config declares VRAMGuardAdaptive
+[PASS] Config loads VRAMGuardAdaptive
+[PASS] Config saves VRAMGuardAdaptive
+[PASS] Config declares VRAMGuardHighPercent
+[PASS] Config loads VRAMGuardHighPercent
+[PASS] Config saves VRAMGuardHighPercent
+[PASS] Config declares VRAMGuardCriticalPercent
+[PASS] Config loads VRAMGuardCriticalPercent
+[PASS] Config saves VRAMGuardCriticalPercent
+[PASS] Config declares VRAMGuardRecoverPercent
+[PASS] Config loads VRAMGuardRecoverPercent
+[PASS] Config saves VRAMGuardRecoverPercent
+[PASS] Config declares VRAMGuardDropOptionalFG
+[PASS] Config loads VRAMGuardDropOptionalFG
+[PASS] Config saves VRAMGuardDropOptionalFG
+[PASS] Config declares VRAMGuardReleaseCachedCopies
+[PASS] Config loads VRAMGuardReleaseCachedCopies
+[PASS] Config saves VRAMGuardReleaseCachedCopies
+[PASS] ReleaseCachedResources declared
+[PASS] ReleaseCachedResources implemented
+[PASS] cached D3D12 resources explicitly released
+[PASS] copy command lists become lazy again
+[PASS] framegen/xefg/XeFG_Dx12.cpp: VRAM Guard include
+[PASS] framegen/xefg/XeFG_Dx12.cpp: releases cached copies on teardown
+[PASS] framegen/xefg/XeFG_Dx12.cpp: critical optional-input drop
+[PASS] framegen/dlssg/DLSSG_Dx12.cpp: VRAM Guard include
+[PASS] framegen/dlssg/DLSSG_Dx12.cpp: releases cached copies on teardown
+[PASS] framegen/dlssg/DLSSG_Dx12.cpp: critical optional-input drop
+[PASS] framegen/ffx/FSRFG_Dx12.cpp: VRAM Guard include
+[PASS] framegen/ffx/FSRFG_Dx12.cpp: releases cached copies on teardown
+[PASS] framegen/ffx/FSRFG_Dx12.cpp: critical optional-input drop
+[PASS] VRAM Guard tick integrated into real Present path
+[PASS] menu control: 8 GB Balanced
+[PASS] menu control: 8 GB Performance
+[PASS] menu control: Adaptive VRAM pressure mode
+[PASS] menu control: Release cached FG copies on backend teardown
+[PASS] menu control: Lean XeFG / FG profile
+[PASS] menu control: 1.5x ratio (1080p -> 720p)
+[PASS] menu control: 1.7x ratio
+[PASS] menu control: Game/default ratio
+[PASS] lean preset applies FGDepthValidNow = false
+[PASS] lean preset applies FGVelocityValidNow = false
+[PASS] lean preset applies FGHudlessValidNow = false
+[PASS] lean preset applies FGResourceFlip = false
+[PASS] lean preset applies FGMakeDepthCopy = false
+[PASS] lean preset applies FGMakeMVCopy = false
+[PASS] lean preset applies FGDrawUIOverFG = false
+[PASS] no OptiColor files merged into performance branch
+[PASS] brace balance: Config.cpp :: delta=0
+[PASS] brace balance: Config.h :: delta=0
+[PASS] brace balance: misc/VRAMGuard.cpp :: delta=0
+[PASS] brace balance: misc/VRAMGuard.h :: delta=0
+[PASS] brace balance: framegen/IFGFeature_Dx12.cpp :: delta=0
+[PASS] brace balance: framegen/IFGFeature_Dx12.h :: delta=0
+[PASS] brace balance: framegen/xefg/XeFG_Dx12.cpp :: delta=0
+[PASS] brace balance: framegen/dlssg/DLSSG_Dx12.cpp :: delta=0
+[PASS] brace balance: framegen/ffx/FSRFG_Dx12.cpp :: delta=0
+[PASS] brace balance: wrapped/wrapped_swapchain.cpp :: delta=0
+[PASS] brace delta unchanged: menu/menu_common.cpp :: base=1 work=1

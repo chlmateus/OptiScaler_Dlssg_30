@@ -1,0 +1,32 @@
+ADAPTIVE FIXED-REFRESH PACING VALIDATION
+=======================================
+
+[PASS] Standalone cadence C++ test
+[PASS] 143.999 exact divisor math
+[PASS] 2x FG base math
+[PASS] 3x FG base math
+[PASS] 3x->2x conservative rebase
+[PASS] Obsolete Adaptive Sync Emulator menu label removed
+[PASS] Adaptive mode isolates raster scheduling
+[PASS] QPC timeline accumulation retained
+[PASS] New presentation mode config load/save
+[PASS] All modified C/C++ files delimiter-balanced
+
+Standalone logic-test output:
+  143.999 Hz divisors: 143.999000, 71.999500, 47.999667, 35.999750
+  2x FG full-refresh base: 71.999500 FPS
+  3x FG full-refresh base: 47.999667 FPS
+  3x -> 2x conservative rebase: 35.999750 FPS (output 71.999500)
+  68 FPS sustainable with 8% reserve: 62.962963 FPS
+  VSync cadence maps that to: 47.999667 FPS, divisor 3
+  Tearing-paced may retain arbitrary target: 62.962963 FPS
+  PASS
+
+Build limitation:
+  Full OptiScaler compilation was not possible in this Linux environment. A clang syntax attempt stops at
+  the project's Windows dependency (Windows.h), so this does not substitute for an MSVC/Windows build.
+  Runtime smoothness/latency gains also require real DX11/DX12/Vulkan hardware testing.
+
+Required Windows/runtime validation remains: VSync on/off, DXGI tearing, Vulkan IMMEDIATE/FIFO/MAILBOX,
+fullscreen/borderless, XeFG 2x/3x and 3x->2x fallback, alt-tab/pause/loading, resize/dynamic resolution,
+VRAM pressure, refresh changes, and latency / P95-P99 / missed-deadline measurements.

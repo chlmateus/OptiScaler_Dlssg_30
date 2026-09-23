@@ -1,0 +1,64 @@
+FrameLock 2 validation summary
+==============================
+
+Status: SOURCE-LEVEL VALIDATION PASSED; Windows/MSVC runtime build still requires the user's PC.
+
+Architecture
+- No new DXGI/Present hook added by FrameLock.
+- Reuses OptiScaler's existing FrameLimit::sleep call sites.
+- Raster phase lock uses dynamically resolved GDI32 D3DKMT scanline APIs.
+- Raster failure/incompatible cadence falls back to the QPC deadline path.
+
+Config
+- New FrameLockSyncMode enum and all new keys have load/save entries.
+- Per-game custom refresh is stored in OptiScaler.ini.
+- Existing LimiterBackend default remains Auto; FrameLock remains opt-in.
+
+Pacing
+- Fractional QPC deadline retained.
+- Large-stall re-anchor retained.
+- Adaptive timer overshoot guard retained.
+- Added auto-tuned bounded precision stage.
+- Added stutter counter and worst timing error.
+- Raster modes require integer-ish refresh/base-FPS cadence (tolerance 0.02 refresh cycles).
+
+Raster
+- D3DKMT_OPENADAPTERFROMHDC field layout verified against Microsoft documentation.
+- D3DKMT_GETSCANLINE fields/semantics verified against Microsoft documentation.
+- Scanline code uses per-monitor HDC -> adapter/source mapping.
+- Exact refresh rational and active/total timing read from QueryDisplayConfig when available.
+- EnumDisplaySettings fallback retained for refresh/height discovery.
+- Auto raster timeout defaults to ~1.25 refresh periods.
+
+UI
+- Added Smooth / Low CPU / Raster Match presets.
+- Added Deadline / Hybrid Raster / Raster Sync selection.
+- Added exact detected and custom per-game refresh controls.
+- Added Hz, Hz/2, Hz/3, Hz-3 and Hz-0.01 cap presets.
+- Added raster offset, VBlank target and timeout controls.
+- Added raster availability/cadence/hit-rate telemetry.
+- Added worst error, stutter count, FPS history and P99 history.
+
+Portable compile check
+- FrameLockLimiter.cpp compiled successfully with g++ -std=c++20 -Wall -Wextra -Wpedantic using a Windows/D3DKMT API stub header.
+- Only warnings came from intentionally minimal stub helper functions, not FrameLock source.
+
+Build packaging
+- Existing dependency bootstrap retained from the previous working package.
+- No new third-party dependency introduced.
+
+Project consistency checks
+- OptiScaler.vcxproj XML parse: PASS
+- OptiScaler.vcxproj.filters XML parse: PASS
+- Project references: 502 baseline / 502 FrameLock 2
+- Missing project references before dependency bootstrap: 8 baseline / 8 FrameLock 2
+- Newly missing project references introduced by FrameLock 2: 0
+- Modified C++ raw brace balance: PASS
+- New config keys present in load, save and OptiScaler.ini: PASS
+- DetourAttach/independent Present hook in FrameLockLimiter.cpp: none
+
+143.999 Hz math
+- 1x base target: 143.999000 FPS, refresh ratio 1.0
+- 2x FG base target: 71.999500 FPS, refresh ratio 2.0
+- 3x FG base target: 47.999667 FPS, refresh ratio 3.0
+- 4x FG base target: 35.999750 FPS, refresh ratio 4.0

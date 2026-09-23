@@ -1,0 +1,17 @@
+OptiScaler VRAM Guard validation
+
+- Base: OptiScaler-master-FrameLock-Final
+- Added files:
+  OptiScaler/misc/VRAMGuard.cpp
+  OptiScaler/misc/VRAMGuard.h
+- Visual Studio project XML: PASS
+- Visual Studio filters XML: PASS
+- New project references resolve: PASS
+- Baseline missing project refs: 8 (unchanged from source package; generated/external paths)
+- Menu integration: PASS
+- Uses existing DxgiVRAM/VulkanVRAM config values: PASS
+- Uses existing FG memory-related settings: PASS
+- No new Present/DXGI interception hooks: PASS
+- No game-owned resource destruction: PASS
+
+Windows-specific final compile still requires MSVC/Windows SDK on the user's PC.

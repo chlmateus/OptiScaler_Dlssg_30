@@ -1,0 +1,46 @@
+OptiScaler + FrameLock ZIP dependency bootstrap validation
+========================================================
+
+Observed source ZIP state before fix:
+- external/simpleini: empty
+- external/unordered_dense: empty
+- external/xess: empty
+- external/vulkan: empty
+- external/spdlog: empty
+- external/FidelityFX-SDK: empty
+- external/magic_enum: empty
+- external/FidelityFX-SDK-v2: empty
+- external/nvapi: empty
+
+Visual Studio expects external/spdlog/include (and other submodule include/library paths),
+which explains C1083 for spdlog/spdlog.h.
+
+Fix added:
+- bootstrap_build_dependencies.ps1
+- bootstrap_build_dependencies.bat
+- automatic pre-build bootstrap for Debug x64
+- automatic pre-build bootstrap for Release x64
+- automatic pre-build bootstrap for ReleaseDebug x64
+
+Exact upstream master gitlink revisions encoded in bootstrap:
+- simpleini 6048871ea9ee0ec24be5bd099d161a10567d7dc2
+- unordered_dense 73f3cbb237e84d483afafc743f1f14ec53e12314
+- xess 8fe81bdbbaf00b3c1b733fd0d830c333dc84e6f0
+- vulkan d64e9e156ac818c19b722ca142230b68e3daafe3
+- spdlog faa0a7a9c5a3550ed5461fab7d8e31c37fd1a2ef
+- FidelityFX-SDK c6efa6bf7f2027b3ec94f28578bb5965eabb9e55
+- magic_enum a733a2ea665ca5d72b7270f0334bf2e7b82bd0cc
+- FidelityFX-SDK-v2 60f4ea81909200d8542eca14dccb2628b763a9a3
+- nvapi 9b181ea572f680327fe01a14a0f1f41c78034104
+
+Static validation:
+- OptiScaler.vcxproj XML: PASS
+- bootstrap hook count: 3
+- all nine dependency paths encoded: PASS
+- existing populated submodule folders are skipped: PASS by code inspection
+- spdlog sentinel checked after bootstrap: PASS by code inspection
+
+Runtime note:
+The dependency downloads cannot be executed in this Linux container because outbound
+network access from the container runtime is unavailable. The URLs use GitHub's codeload
+endpoint and are resolved at build time on the user's Windows machine.

@@ -1,0 +1,8 @@
+VRAM Guard build-fix validation
+===============================
+
+- User build log contained one compiler error: menuResScale undeclared in menu_common.cpp.
+- RenderVramGuardSettings now declares: auto& menuResScale = ctx.menuResScale;
+- Existing use of 120.0f * menuResScale is therefore in scope.
+- No other source behavior was changed by this fix.
+- Windows/MSVC final compilation must still be performed on the user's machine.
